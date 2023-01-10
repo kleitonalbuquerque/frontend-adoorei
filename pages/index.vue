@@ -57,10 +57,9 @@ export default {
     };
   },
   created() {
-    this.$axios
-      .get("https://fakestoreapi.com/products")
-      .then((response) => (this.items = response.data));
-    // .then(response => console.table(response.data))
+    this.$store.dispatch('products/getAllProducts')
+    .then((response) => (this.items = response.data))
+    .then((response) => console.table(this.items))
   },
 };
 </script>

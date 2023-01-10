@@ -7,17 +7,24 @@
           Products
         </h2>
 
+        <!-- <pre>{{ products.data }}</pre> -->
+
         <div class="grid lg:grid-cols-3 gap-6 xl:gap-x-12">
-          <div class="mb-6 lg:mb-0" v-for="item in items" :key="item.id">
+          <!-- <div class="mb-6 lg:mb-0" v-for="item in items" :key="item.id"> -->
+          <div 
+            class="mb-6 lg:mb-0" 
+            v-for="product in products.data" 
+            :key="product.id"
+          >
             <div class="relative block bg-white rounded-lg shadow-lg">
-              <div class="flex">
+              <div class="flex flex-center">
                 <div
                   class="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover shadow-lg rounded-lg mx-4 -mt-4"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                 >
                   <img
-                    :src="item.image"
+                    :src="product.image"
                     class="w-full"
                     style="width: 300px; height: 350px;"
                   />
@@ -30,12 +37,12 @@
                 </div>
               </div>
               <div class="p-6">
-                <h5 class="font-bold text-lg mb-3">{{ item.title }}</h5>
+                <h5 class="font-bold text-lg mb-3">{{ product.title }}</h5>
                 <p class="mb-4 pb-2">
-                  {{ item.description }}
+                  {{ product.description }}
                 </p>
                 <p class="mb-4 pb-2">
-                  <strong>Price:</strong> {{ item.price }}
+                  <strong>Price:</strong> {{ product.price }}
                 </p>
               </div>
             </div>
@@ -44,22 +51,16 @@
       </section>
       <!-- Section: Design Block -->
     </div>
-    <!-- Container for demo purpose -->
   </div>
 </template>
 
 <script>
 export default {
   name: "IndexPage",
-  data() {
-    return {
-      items: [],
-    };
-  },
-  created() {
-    this.$store.dispatch('products/getAllProducts')
-    .then((response) => (this.items = response.data))
-    .then((response) => console.table(this.items))
+  async asyncData({ store }) {
+    const products = await store.dispatch('products/getAllProducts')
+
+    return { products }
   },
 };
 </script>

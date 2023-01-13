@@ -6,7 +6,7 @@
       <div
         class="container flex flex-wrap items-center justify-between mx-auto"
       >
-        <a href="https://flowbite.com/" class="flex items-center">
+        <nuxt-link to="/" class="flex items-center">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
             class="h-6 mr-3 sm:h-9"
@@ -16,17 +16,9 @@
             class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
             >Flowbite</span
           >
-        </a>
+        </nuxt-link>
 
-        <select
-          id=""
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        >
-          <option selected>Choose a category</option>
-          <option v-for="category in categories" :key="category.id" value="">
-            {{ category }}
-          </option>
-        </select>
+        <Select></Select>
 
         <div class="flex md:order-2">
           <button
@@ -160,19 +152,3 @@
     </nav>
   </div>
 </template>
-
-<script>
-export default {
-  name: "NavMenu",
-  data() {
-    return {
-      categories: [],
-    };
-  },
-  async fetch() {
-    this.categories = await fetch(
-      "https://fakestoreapi.com/products/categories"
-    ).then((res) => res.json());
-  },
-};
-</script>

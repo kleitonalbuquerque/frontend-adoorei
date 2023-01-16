@@ -22,7 +22,6 @@
             {{ categoria }}
           </option>
         </select>
-        <!-- <pre>{{ selected }}</pre> -->
       </div>
       <div class="carrinho_menu" @click="carrinhoAtivo = true">
         $ {{ carrinhoTotal.toFixed(2) | numeroPreco }} | {{ carrinho.length }}
@@ -47,26 +46,28 @@
     </section>
 
     <!-- Lista electronics -->
-    <section class="produtos" v-if="selected == 'electronics'">
-      <h1 class="text-3xl font-bold text-center mb-5">Electronics</h1>
-      <div
-        v-for="item in produtos"
-        :key="item.id"
-        @click="abrirModal(item.id)"
-        class="produto"
-      >
+    <div class="">
+      <section class="produtos" v-if="selected == 'electronics'">
+        <h1 class="text-3xl font-bold text-center mb-5">Electronics</h1>
         <div
-          v-if="item.category == 'electronics'"
-          class="flex items-center my-10 cat-mob"
+          v-for="item in produtos"
+          :key="item.id"
+          @click="abrirModal(item.id)"
+          class="produto"
         >
-          <img :src="item.image" :alt="item.title" class="produto_img" />
-          <div class="produto_info">
-            <span class="produto_price">${{ item.price | numeroPreco }}</span>
-            <h2>{{ item.title }}</h2>
+          <div
+            v-if="item.category == 'electronics'"
+            class="flex items-center my-10 cat-mob"
+          >
+            <img :src="item.image" :alt="item.title" class="produto_img" />
+            <div class="produto_info">
+              <span class="produto_price">${{ item.price | numeroPreco }}</span>
+              <h2>{{ item.title }}</h2>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
     <!-- Lista jewelery -->
     <section class="produtos" v-if="selected == 'jewelery'">
@@ -77,8 +78,8 @@
         :key="item.id"
         class="produto"
       >
-        <div 
-          v-if="item.category == 'jewelery'" 
+        <div
+          v-if="item.category == 'jewelery'"
           class="flex items-center my-10 cat-mob"
         >
           <img :src="item.image" :alt="item.title" class="produto_img" />
@@ -92,15 +93,17 @@
 
     <!-- Lista men's clothing -->
     <section class="produtos" v-if="selected == `men's clothing`">
-      <h1 class="text-3xl font-bold text-center" style="margin-bottom: 20px;">Men's clothing</h1>
+      <h1 class="text-3xl font-bold text-center" style="margin-bottom: 20px">
+        Men's clothing
+      </h1>
       <div
         v-for="item in produtos"
         @click="abrirModal(item.id)"
         :key="item.id"
         class="produto"
       >
-        <div 
-          v-if="item.category == `men's clothing`" 
+        <div
+          v-if="item.category == `men's clothing`"
           class="flex items-center my-10 cat-mob"
         >
           <img :src="item.image" :alt="item.title" class="produto_img" />
@@ -114,15 +117,17 @@
 
     <!-- Lista women's clothing -->
     <section class="produtos" v-if="selected == `women's clothing`">
-      <h1 class="text-3xl font-bold text-center" style="margin-bottom: -100px;">Women's clothing</h1>
+      <h1 class="text-3xl font-bold text-center" style="margin-bottom: -100px">
+        Women's clothing
+      </h1>
       <div
         v-for="item in produtos"
         @click="abrirModal(item.id)"
         :key="item.id"
         class="produto"
       >
-        <div 
-          v-if="item.category == `women's clothing`" 
+        <div
+          v-if="item.category == `women's clothing`"
           class="flex items-center my-10 cat-mob"
         >
           <img :src="item.image" :alt="item.title" class="produto_img" />
@@ -136,23 +141,111 @@
 
     <!-- Detalhes do produto -->
     <section class="modal" v-if="produto" @click="fecharModal">
+
       <div class="modal_container">
-        <div class="modal_img">
-          <img :src="produto.image" :alt="produto.title" />
-        </div>
-        <div class="modal_dados">
-          <button class="modal_fechar" @click="fecharModal">X</button>
-          <span class="modal_price">${{ produto.price | numeroPreco }}</span>
-          <h2 class="modal_titulo">{{ produto.title }}</h2>
-          <p>{{ produto.description }}</p>
-          <div class="reviews">
-            <h2 class="reviews_subtitulo">Avaliações</h2>
-            <p class="review_usuario">{{ produto.rating.rate }} estrelas</p>
+        <section
+          class="text-gray-800 text-center flex flex-wrap justify-center"
+        >
+          <div
+            class="w-full max-w-sm bg-white rounded-lg mb-10 shadow-md dark:bg-gray-800 dark:border-gray-700"
+          >
+            <img
+              class="p-8 rounded-t-lg"
+              :src="produto.image"
+              :alt="produto.title"
+            />
+            <div class="px-5 pb-5">
+              <a href="#">
+                <h5
+                  class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+                >
+                  {{ produto.title }}
+                </h5>
+              </a>
+              <div class="flex items-center mt-2.5 mb-5">
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>First star</title>
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>Second star</title>
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>Third star</title>
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>Fourth star</title>
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>Fifth star</title>
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3"
+                  >{{ produto.rating.rate }}</span
+                >
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-3xl font-bold text-gray-900 dark:text-white"
+                  >${{ produto.price }}</span
+                >
+                <a
+                  @click="adicionarItem"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >Adicionar</a
+                >
+                <a
+                  @click="fecharModal"
+                  class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                  >Fechar</a
+                >
+              </div>
+            </div>
           </div>
-          <button class="modal_btn" @click="adicionarItem">
-            Adicionar Item
-          </button>
-        </div>
+        </section>
       </div>
     </section>
 
@@ -275,7 +368,7 @@ export default {
     finalizarCompra() {
       alert("Compra finalizada com sucesso!");
       setTimeout(() => {
-        window.location.reload()
+        window.location.reload();
       }, 1000);
     },
     router() {
@@ -424,7 +517,7 @@ body {
 }
 
 .modal_container {
-  background: linear-gradient(to right, transparent 250px, white 250px);
+  /* background: linear-gradient(to right, transparent 250px, white 250px); */
   display: grid;
   grid-gap: 50px;
   align-items: end;

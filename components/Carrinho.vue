@@ -43,17 +43,17 @@
           <!-- <button class="modal_btn esgotado" v-else disabled>
             Produto esgotado
           </button> -->
-        </div>
-        <div class="reviews">
-          <h2 class="reviews_subtitulo">Avaliações</h2>
-          <ul>
-            <li v-for="review in produtos" :key="review.id" class="review">
-              <p class="review_descricao">{{ review.description }}</p>
-              <p class="review_usuario">
-                {{ review.title }} | {{ review.rating.rate }} estrelas
-              </p>
-            </li>
-          </ul>
+          <div class="reviews">
+            <h2 class="reviews_subtitulo">Avaliações</h2>
+            <ul>
+              <li v-for="review in produtos" :key="review.id" class="review">
+                <p class="review_descricao">{{ review.description }}</p>
+                <p class="review_usuario">
+                  {{ review.title }} | {{ review.rating.rate }} estrelas
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
